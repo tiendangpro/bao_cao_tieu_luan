@@ -1,0 +1,309 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/28/2021  09:21:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\C51\BIN\BL51.EXE STARTUP.obj, .\BAI31.obj TO BAI31
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  .\BAI31.obj (BAI31)
+  E:\C51\LIB\C51S.LIB (?C?CLDPTR)
+  E:\C51\LIB\C51S.LIB (?C?LLDIIDATA)
+
+
+LINK MAP OF MODULE:  BAI31 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?_DELAY?BAI31
+            DATA    000CH     0003H     UNIT         _DATA_GROUP_
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0045H     UNIT         ?PR?LCD_INIT?BAI31
+            CODE    0048H     003EH     UNIT         ?PR?MAIN?BAI31
+            CODE    0086H     0039H     UNIT         ?C?LIB_CODE
+            CODE    00BFH     0028H     UNIT         ?CO?BAI31
+            CODE    00E7H     0023H     UNIT         ?PR?_LCD_PUTS?BAI31
+            CODE    010AH     0020H     UNIT         ?PR?_DELAY_MS?BAI31
+            CODE    012AH     0020H     UNIT         ?PR?_LCD_GOTOXY?BAI31
+            CODE    014AH     001CH     UNIT         ?PR?_LCD_SEND4BIT?BAI31
+            CODE    0166H     0016H     UNIT         ?PR?_DELAY?BAI31
+            CODE    017CH     0013H     UNIT         ?PR?LCD_ENABLE?BAI31
+            CODE    018FH     0012H     UNIT         ?PR?_DELAY_US?BAI31
+            CODE    01A1H     0012H     UNIT         ?PR?_LCD_SENDCOMMAND?BAI31
+            CODE    01B3H     000CH     UNIT         ?C_C51STARTUP
+            CODE    01BFH     000CH     UNIT         ?PR?LCD_CLEAR?BAI31
+            CODE    01CBH     0008H     UNIT         ?PR?_LCD_PUTCHAR?BAI31
+
+
+
+OVERLAY MAP OF MODULE:   BAI31 (?C_STARTUP)
+
+
+SEGMENT                              DATA_GROUP 
+  +--> CALLED SEGMENT              START    LENGTH
+--------------------------------------------------
+?C_C51STARTUP                      -----    -----
+  +--> ?PR?MAIN?BAI31
+
+?PR?MAIN?BAI31                     -----    -----
+  +--> ?PR?LCD_INIT?BAI31
+  +--> ?CO?BAI31
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/28/2021  09:21:27  PAGE 2
+
+
+  +--> ?PR?_LCD_PUTS?BAI31
+  +--> ?PR?_DELAY_MS?BAI31
+  +--> ?PR?LCD_CLEAR?BAI31
+  +--> ?PR?_LCD_GOTOXY?BAI31
+
+?PR?LCD_INIT?BAI31                 -----    -----
+  +--> ?PR?_LCD_SEND4BIT?BAI31
+  +--> ?PR?_DELAY_MS?BAI31
+  +--> ?PR?LCD_ENABLE?BAI31
+  +--> ?PR?_DELAY_US?BAI31
+  +--> ?PR?_LCD_SENDCOMMAND?BAI31
+
+?PR?LCD_ENABLE?BAI31               -----    -----
+  +--> ?PR?_LCD_SEND4BIT?BAI31
+  +--> ?PR?_DELAY_US?BAI31
+
+?PR?_LCD_SENDCOMMAND?BAI31         -----    -----
+  +--> ?PR?LCD_ENABLE?BAI31
+  +--> ?PR?_LCD_SEND4BIT?BAI31
+
+?PR?_LCD_PUTS?BAI31                000CH    0003H
+  +--> ?PR?_LCD_PUTCHAR?BAI31
+
+?PR?_LCD_PUTCHAR?BAI31             -----    -----
+  +--> ?PR?_LCD_SENDCOMMAND?BAI31
+
+?PR?LCD_CLEAR?BAI31                -----    -----
+  +--> ?PR?_LCD_SENDCOMMAND?BAI31
+  +--> ?PR?_DELAY_US?BAI31
+
+?PR?_LCD_GOTOXY?BAI31              -----    -----
+  +--> ?PR?_DELAY_US?BAI31
+  +--> ?PR?_LCD_SENDCOMMAND?BAI31
+
+
+
+SYMBOL TABLE OF MODULE:  BAI31 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:01B3H         SEGMENT       ?C_C51STARTUP
+  I:000FH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:01B6H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/28/2021  09:21:27  PAGE 3
+
+
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:01B3H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:01B3H         LINE#         133
+  C:01B5H         LINE#         134
+  C:01B6H         LINE#         135
+  C:01B7H         LINE#         136
+  C:01B9H         LINE#         185
+  C:01BCH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        BAI31
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:017FH         PUBLIC        LCD_Enable
+  C:01A1H         PUBLIC        _LCD_SendCommand
+  B:0090H.0       PUBLIC        P1_0
+  C:0166H         PUBLIC        _delay
+  B:0090H.1       PUBLIC        P1_1
+  B:0090H.2       PUBLIC        P1_2
+  B:0080H.4       PUBLIC        P0_4
+  B:0080H.5       PUBLIC        P0_5
+  C:014AH         PUBLIC        _LCD_Send4Bit
+  B:0080H.6       PUBLIC        P0_6
+  B:0080H.7       PUBLIC        P0_7
+  C:01BFH         PUBLIC        LCD_Clear
+  C:0048H         PUBLIC        main
+  C:012AH         PUBLIC        _LCD_Gotoxy
+  C:0003H         PUBLIC        LCD_Init
+  C:010AH         PUBLIC        _delay_ms
+  C:018FH         PUBLIC        _delay_us
+  C:00E7H         PUBLIC        _LCD_Puts
+  C:01CBH         PUBLIC        _LCD_PutChar
+  -------         PROC          _DELAY_US
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:018FH         LINE#         11
+  C:018FH         LINE#         13
+  C:01A0H         LINE#         14
+  -------         ENDPROC       _DELAY_US
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:010AH         LINE#         16
+  C:010AH         LINE#         18
+  C:0114H         LINE#         19
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/28/2021  09:21:27  PAGE 4
+
+
+  C:0129H         LINE#         20
+  -------         ENDPROC       _DELAY_MS
+  -------         PROC          _DELAY
+  D:0008H         SYMBOL        time
+  C:0166H         LINE#         22
+  C:016EH         LINE#         23
+  C:016EH         LINE#         24
+  C:017BH         LINE#         25
+  -------         ENDPROC       _DELAY
+  -------         PROC          L?0033
+  -------         ENDPROC       L?0033
+  -------         PROC          LCD_ENABLE
+  C:017FH         LINE#         27
+  C:017FH         LINE#         28
+  C:0181H         LINE#         29
+  C:0188H         LINE#         30
+  C:018AH         LINE#         31
+  -------         ENDPROC       LCD_ENABLE
+  -------         PROC          _LCD_SEND4BIT
+  D:0007H         SYMBOL        Data
+  C:014AH         LINE#         34
+  C:014AH         LINE#         35
+  C:014EH         LINE#         36
+  C:0154H         LINE#         37
+  C:015CH         LINE#         38
+  C:0165H         LINE#         39
+  -------         ENDPROC       _LCD_SEND4BIT
+  -------         PROC          _LCD_SENDCOMMAND
+  D:0003H         SYMBOL        command
+  C:01A1H         LINE#         41
+  C:01A3H         LINE#         42
+  C:01A8H         LINE#         43
+  C:01ABH         LINE#         44
+  C:01B0H         LINE#         45
+  -------         ENDPROC       _LCD_SENDCOMMAND
+  -------         PROC          LCD_CLEAR
+  C:01BFH         LINE#         48
+  C:01BFH         LINE#         49
+  C:01C4H         LINE#         50
+  -------         ENDPROC       LCD_CLEAR
+  -------         PROC          LCD_INIT
+  C:0003H         LINE#         53
+  C:0003H         LINE#         54
+  C:0008H         LINE#         55
+  C:000FH         LINE#         56
+  C:0011H         LINE#         57
+  C:0013H         LINE#         58
+  C:0015H         LINE#         59
+  C:0018H         LINE#         60
+  C:001FH         LINE#         61
+  C:0022H         LINE#         62
+  C:0029H         LINE#         63
+  C:002CH         LINE#         64
+  C:0031H         LINE#         65
+  C:0034H         LINE#         66
+  C:0039H         LINE#         67
+  C:003EH         LINE#         68
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/28/2021  09:21:27  PAGE 5
+
+
+  C:0043H         LINE#         69
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _LCD_GOTOXY
+  D:0007H         SYMBOL        x
+  D:0005H         SYMBOL        y
+  -------         DO            
+  D:0002H         SYMBOL        address
+  -------         ENDDO         
+  C:012AH         LINE#         72
+  C:012AH         LINE#         74
+  C:0133H         LINE#         75
+  C:0137H         LINE#         76
+  C:013EH         LINE#         77
+  C:0143H         LINE#         78
+  -------         ENDPROC       _LCD_GOTOXY
+  -------         PROC          _LCD_PUTCHAR
+  D:0007H         SYMBOL        Data
+  C:01CBH         LINE#         81
+  C:01CBH         LINE#         82
+  C:01CDH         LINE#         83
+  C:01D0H         LINE#         84
+  C:01D2H         LINE#         85
+  -------         ENDPROC       _LCD_PUTCHAR
+  -------         PROC          _LCD_PUTS
+  D:000CH         SYMBOL        s
+  C:00E7H         LINE#         87
+  C:00EDH         LINE#         88
+  C:00F9H         LINE#         89
+  C:00FCH         LINE#         90
+  C:0107H         LINE#         91
+  C:0109H         LINE#         92
+  -------         ENDPROC       _LCD_PUTS
+  -------         PROC          MAIN
+  C:0048H         LINE#         94
+  C:0048H         LINE#         95
+  C:004BH         LINE#         96
+  C:0054H         LINE#         97
+  C:005BH         LINE#         98
+  C:005EH         LINE#         99
+  C:0064H         LINE#         100
+  C:006DH         LINE#         101
+  C:0074H         LINE#         102
+  C:007BH         LINE#         103
+  C:0084H         LINE#         104
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BAI31
+
+  -------         MODULE        ?C?CLDPTR
+  C:0086H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?LLDIIDATA
+  C:00A8H         PUBLIC        ?C?LLDIIDATA
+  C:009FH         PUBLIC        ?C?LLDIIDATA1
+  C:00A1H         PUBLIC        ?C?LLDIIDATA8
+  -------         ENDMOD        ?C?LLDIIDATA
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/28/2021  09:21:27  PAGE 6
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?BAI31
+
+Program Size: data=16.0 xdata=0 code=467
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,48 @@
+C51 COMPILER V9.52.0.0   C_U11                                                             06/28/2021 21:41:48 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE C_U11
+OBJECT MODULE PLACED IN .\câu11.obj
+COMPILER INVOKED BY: E:\C51\BIN\C51.EXE F:\câu11.c BROWSE DEBUG OBJECTEXTEND PRINT(.\câu11.lst) TABS(2) OBJECT(.\câu11.o
+                    -bj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          char so[]={0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10, 0x89,0x06,0xC7,0x40};
+   3          //
+   4          #define led1 P2_0
+   5          #define led2 P2_1
+   6          #define sang 0
+   7          #define tat 1
+   8          char i;
+   9          void delay(int time){
+  10   1        while(time--);
+  11   1      }
+  12          void main(){
+  13   1        led1 = led2 = tat;
+  14   1        while(1){
+  15   2          led1 = sang;
+  16   2          P0   = so[0];
+  17   2          delay(300000);
+  18   2          led1 = tat;
+  19   2          led2 = tat;
+  20   2                     P0 = so[0];
+  21   2          delay(300000);
+  22   2          led2 = sang;
+  23   2        }
+  24   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     38    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     15    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

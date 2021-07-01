@@ -1,0 +1,72 @@
+C51 COMPILER V9.52.0.0   CAU4                                                              06/28/2021 09:44:27 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE CAU4
+OBJECT MODULE PLACED IN .\CAU4.obj
+COMPILER INVOKED BY: E:\C51\BIN\C51.EXE F:\CAU4.c BROWSE DEBUG OBJECTEXTEND PRINT(.\CAU4.lst) TABS(2) OBJECT(.\CAU4.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include <RTX51TNY.H>        //Su dung thu vien RTX51 Tiny Real-Time
+   3          #define INIT 0               //Dinh nghia INIT = 0
+   4          #define DO 1                 //Dinh nghia DO = 1
+   5          #define BUTT 2               //Dinh nghia BUTTTON = 2
+   6          sbit LED_DO = P1^2;          //Dinh nghia chan LED_DO
+   7          sbit BUTTON = P1^3;          //Dinh nghia chan BUTTON
+   8          void USART(void) interrupt 4 //Ngat nhan USART
+   9          {
+  10   1       if(RI)                      //Flag nhan duoc ki tu
+  11   1       { //Clear flag
+  12   2       RI=0; //Nhan ki tu 
+  13   2       isr_send_signal(DO);        //Gui signal cho task DO
+  14   2       }
+  15   1      }
+  16          //=========Ham Start up==========
+  17          void Startup(void) _task_ INIT
+  18          { 
+  19   1       SCON=0x52;                  //USART che do 1
+  20   1       TMOD=0x21;                  //Timer 1 mode 2
+  21   1       TH1=TL1=-3;                 //baudrate 9600
+  22   1       TR1=1;
+  23   1       IE=0x90;                    //Ngat USART 
+  24   1       os_create_task (DO);        //Tao Task_Led_Do 
+  25   1       os_create_task (BUTT);      //Tao Task BUTTON
+  26   1       os_delete_task (INIT);      //Xoa Task hien tai (Task 0)
+  27   1      }
+  28          void Task_Led_Do(void) _task_ DO 
+  29          {
+  30   1       while(1)
+  31   1       { 
+  32   2       os_wait2(K_SIG ,50);        //Cho signal voi time out 50 ticks 
+  33   2       LED_DO ^= 1;                //Dao trang thai Led Do
+  34   2       }
+  35   1      }
+  36          void Task_BUTTON(void) _task_ BUTT
+  37          {
+  38   1       while(1)
+  39   1       {
+  40   2       if(BUTTON == 0)             //Nhan nut nhan = 0
+  41   2       {
+  42   3       os_send_signal(DO);         //Gui signal cho task DO
+  43   3       while(BUTTON==0);           //Cho nut nhan = 1(Chong nhieu)
+  44   3       }
+  45   2       os_wait2(K_TMO, 10);        //Cho 10 ticks = 100ms
+  46   2       }
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    132    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+C51 COMPILER V9.52.0.0   CAU4                                                              06/28/2021 09:44:27 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

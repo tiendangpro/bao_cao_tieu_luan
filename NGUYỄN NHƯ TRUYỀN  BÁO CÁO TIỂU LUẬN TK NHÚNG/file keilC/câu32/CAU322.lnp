@@ -1,0 +1,4 @@
+"STARTUP.obj",
+".\CAU322.obj" 
+TO "CAU322" 
+RAMSIZE(256) 

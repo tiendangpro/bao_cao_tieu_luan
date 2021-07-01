@@ -1,0 +1,99 @@
+C51 COMPILER V9.52.0.0   CAU322                                                            06/28/2021 20:25:24 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE CAU322
+OBJECT MODULE PLACED IN .\CAU322.obj
+COMPILER INVOKED BY: E:\C51\BIN\C51.EXE F:\CAU322.c BROWSE DEBUG OBJECTEXTEND PRINT(.\CAU322.lst) TABS(2) OBJECT(.\CAU32
+                    -2.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          sbit rs = P2^0;
+   4          sbit rw = P2^1;
+   5          sbit e = P2^2;
+   6          
+   7          void delay(unsigned int t)
+   8          {
+   9   1        unsigned int i, j;
+  10   1        e = 1;
+  11   1        for(i = 0; i < t; i++)
+  12   1        for(j = 0; j < 1275; j++);
+  13   1        e = 0;
+  14   1      }
+  15          
+  16          void cmd1(unsigned char ch)
+  17          {
+  18   1        P2 = ch;
+  19   1        rs = 0;
+  20   1        rw = 0;
+  21   1        delay(10);
+  22   1      }
+  23          
+  24          void dat1(unsigned char ch)
+  25          {
+  26   1        P2 = ch;
+  27   1        rs = 1;
+  28   1        rw = 0;
+  29   1        delay(10);
+  30   1      }
+  31          
+  32          void cmd(unsigned char a)
+  33          {
+  34   1        unsigned char x;
+  35   1        x = a & 0xF0;
+  36   1        cmd1(x);
+  37   1        x = (a << 4) & 0xF0;
+  38   1        cmd1(x);
+  39   1      }
+  40          
+  41          void dat(unsigned char a)
+  42          {
+  43   1        unsigned char x;
+  44   1        x = a & 0xF0;
+  45   1        dat1(x);
+  46   1        x = (a << 4) & 0xF0;
+  47   1        dat1(x);
+  48   1      }
+  49          
+  50          void main(void)
+  51          {
+  52   1        unsigned char mybyte;
+  53   1        cmd(0x28);
+  54   1        cmd(0x01);
+C51 COMPILER V9.52.0.0   CAU322                                                            06/28/2021 20:25:24 PAGE 2   
+
+  55   1        cmd(0x0C);
+  56   1        cmd(0x80);
+  57   1        cmd(0x06);
+  58   1        TMOD = 0x20;
+  59   1        TH1 = 0xFD;
+  60   1        SCON = 0x50;
+  61   1        TR1 = 1;
+  62   1        while(1)
+  63   1        {
+  64   2          while(RI == 0);
+  65   2          mybyte = SBUF;
+  66   2          dat(mybyte);
+  67   2          RI = 0;
+  68   2          if(mybyte == 0x08)
+  69   2            cmd(0x01); 
+  70   2          if(mybyte == 0x0D)
+  71   2            cmd(0xC0);
+  72   2        }
+  73   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    167    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

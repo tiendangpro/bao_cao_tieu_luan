@@ -1,0 +1,4 @@
+"STARTUP.obj",
+".\CAU4.obj" 
+TO "CAU4" Rtx51Tiny 
+RAMSIZE(256) 
